@@ -16,4 +16,6 @@ public class NotificationRequest {
 
     @NotBlank(message = "Message is required")
     private String message;
+
+    private int retryCount = 0;
 }
