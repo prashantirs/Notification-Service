@@ -192,5 +192,3 @@ docker-compose down -v
 **Prashant Srivastava**  
 Java Backend Developer  
 [LinkedIn](https://linkedin.com/in/prashantirs) • [GitHub](https://github.com/prashantirs)
-
----
