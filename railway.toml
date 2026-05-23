@@ -1,0 +1,7 @@
+[build]
+builder = "DOCKERFILE"
+
+[deploy]
+startCommand = "java -jar target/notification-service-0.0.1-SNAPSHOT.jar"
+healthcheckPath = "/actuator/health"
+restartPolicyType = "ON_FAILURE"
