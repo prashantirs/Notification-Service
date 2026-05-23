@@ -4,6 +4,8 @@ import com.notifyhub.config.KafkaConfig;
 import com.notifyhub.dto.NotificationRequest;
 import com.notifyhub.entity.NotificationLog;
 import com.notifyhub.repository.NotificationRepository;
+import com.notifyhub.service.EmailService;
+import com.notifyhub.service.TelegramService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -16,6 +18,8 @@ public class NotificationConsumer {
 
     private final NotificationRepository notificationRepository;
     private final NotificationProducer notificationProducer;
+    private final EmailService emailService;
+    private final TelegramService telegramService;
 
     @KafkaListener(topics = KafkaConfig.EMAIL_TOPIC, groupId = "notification-group")
     public void consumeEmail(NotificationRequest request) {
@@ -108,8 +112,11 @@ public class NotificationConsumer {
 
     private void simulateSend(String channel,
                               NotificationRequest request) {
-        // Real email sending will be added next step
-        // SMS and PUSH are mocked
-        log.info("📤 Simulating {} send to {}", channel, request.getRecipient());
+        switch (channel.toUpperCase()) {
+            case "EMAIL" -> emailService.sendEmail(request); // ← real!
+            case "SMS"   -> log.info("📱 SMS mock sent to: {}", request.getRecipient());
+            case "PUSH" -> telegramService.sendMessage(request);
+            default      -> throw new RuntimeException("Unknown channel: " + channel);
+        }
     }
 }
