@@ -192,9 +192,3 @@ docker-compose down -v
 **Prashant Srivastava**  
 Java Backend Developer  
 [LinkedIn](https://linkedin.com/in/prashantirs) • [GitHub](https://github.com/prashantirs)
-
----
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
